@@ -1,7 +1,9 @@
-import { RequestOptions, Headers, Http } from '@angular/http';
+import {ResponseContentType, RequestOptions,  Headers,  Http} from '@angular/http';
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/operator/map';
 
 const address = "http://localhost:1818";
 const aClient = "client"
@@ -30,12 +32,13 @@ public login(email, password) {
   return this.http.post(address + '/oauth/token', params.toString(), options);
 }
 
-public setTokens(token) {
+public setTokens(token, email) {
   this.accessToken = token.access;
   this.refreshToken = token.refresh;
 
   localStorage.setItem("token_access", token.access);
   localStorage.setItem("token_refresh", token.refresh);
+  localStorage.setItem("userEmail", email)
 }
 
 public registerNewUser(email, nick, password) {
@@ -47,9 +50,19 @@ public uploadProfilePicture(email, file: File) {
   const formData: FormData = new FormData();
   formData.append('fileKey', file, file.name);
   formData.append('email', email);
-  console.log(formData);
   return this.http
     .post(address + '/user/picture', formData);
+}
+
+
+public getImage(email: string): Observable<File> {
+  return this.http
+      .get(address + '/user/picture/' + email, { responseType: ResponseContentType.Blob })
+      .map((res: any) => res.blob());
+}
+
+public getUserNick(email) {
+  return this.http.get(address + '/user/nick?email=' + email);
 }
 }
 

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Route } from '@angular/compiler/src/core';
 import { Router } from '@angular/router';
+import { Input } from '@angular/core';
+import { HttpService } from '../../services/http.service';
 
 @Component({
   selector: 'app-main',
@@ -9,17 +11,25 @@ import { Router } from '@angular/router';
 })
 export class MainComponent implements OnInit {
 
+
   user = {
-    nick: "imie"
+    email: "",
+    nick: ""
   };
 
-  constructor(private router: Router) {
+  constructor(private router: Router, private http: HttpService) {
        if (localStorage.getItem("token_access") == null) {
      this.router.navigate(["login"]);
    }
-   }
+   this.user.email = localStorage.getItem("userEmail");
+  }
 
   ngOnInit() {
+    this.http.getUserNick(this.user.email).subscribe((data: any) => {
+      if (data.status === 200) {
+         this.user.nick = data._body;
+      }
+  });
   }
 
 }

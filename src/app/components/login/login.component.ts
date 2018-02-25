@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../services/auth.service';
 import { HttpService } from '../../services/http.service';
 import { error } from 'util';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -15,7 +16,10 @@ export class LoginComponent implements OnInit {
   info = "";
   fileToUpload: File = null;
   readyForSubmit = false;
-  constructor(private authService: AuthService, private http: HttpService, private photoService: PhotoService) { }
+  constructor(private authService: AuthService
+    , private http: HttpService
+    , private photoService: PhotoService
+    , private router: Router) { }
 
   ngOnInit() {
   }
@@ -28,7 +32,8 @@ export class LoginComponent implements OnInit {
             access: data.json().access_token,
             refresh : data.json().refresh_token
           };
-          this.http.setTokens(token);
+          this.http.setTokens(token, email);
+          this.router.navigate(["main"]);
         }
       }
     );

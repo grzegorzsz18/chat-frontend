@@ -1,3 +1,4 @@
+import { Ng2ImgMaxModule } from 'ng2-img-max';
 import { PhotoService } from './services/photo.service';
 import { AuthService } from './services/auth.service';
 import { BrowserModule } from '@angular/platform-browser';
@@ -27,7 +28,7 @@ const routes: Routes = [
     PersonComponent
   ],
   imports: [
-    HttpModule, BrowserModule, HttpClientModule, RouterModule.forRoot(routes, {useHash: true})
+    HttpModule, BrowserModule, HttpClientModule,Ng2ImgMaxModule, RouterModule.forRoot(routes, {useHash: true})
   ],
   providers: [AuthService, HttpService, PhotoService],
   bootstrap: [AppComponent]
