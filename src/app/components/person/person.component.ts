@@ -11,6 +11,7 @@ import { Ng2ImgMaxModule, Ng2ImgMaxService } from 'ng2-img-max';
 export class PersonComponent implements OnInit {
 
   @Input() userData: any;
+  @Input() isList: boolean;
   imageToShow: any;
 
   constructor(private httpService: HttpService, private ng2ImgMaxService: Ng2ImgMaxService) {

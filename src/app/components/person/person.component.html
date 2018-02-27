@@ -1,5 +1,9 @@
-<p>
+<div [ngClass]="(!isList)?'':'colorForList'">
+<div class="userName">
   {{userData.nick}}
+</div>
   <img [src]="imageToShow"
   alt="Place image title">
-</p>
+  <hr>
+</div>
+

@@ -1,4 +1,12 @@
-<app-person [userData]= "user"></app-person>
-<hr>
-<div class = "vl">
+
+<body>
+  <div class="user">
+<app-person [userData]= "user" [isList]="false"></app-person>
 </div>
+<div class = "vl">
+  <p *ngFor="let user of users">
+      <app-person [userData]= "user" [isList]="true"></app-person>
+  </p>
+
+</div>
+</body>

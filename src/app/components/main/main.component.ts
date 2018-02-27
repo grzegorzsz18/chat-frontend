@@ -17,11 +17,23 @@ export class MainComponent implements OnInit {
     nick: ""
   };
 
+  users: Array<any>;
+
   constructor(private router: Router, private http: HttpService) {
        if (localStorage.getItem("token_access") == null) {
      this.router.navigate(["login"]);
    }
    this.user.email = localStorage.getItem("userEmail");
+
+   //change limit for pagging
+   this.http.getAllUsers(0, 10).subscribe(data =>
+  {
+    if (data.status === 200) {
+      this.users = data.json();
+      console.log(this.users);
+
+    }
+  });
   }
 
   ngOnInit() {
