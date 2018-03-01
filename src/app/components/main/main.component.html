@@ -3,10 +3,15 @@
   <div class="user">
 <app-person [userData]= "user" [isList]="false"></app-person>
 </div>
-<div class = "vl">
-  <p *ngFor="let user of users">
+<div>
+  <div id="left">
+    cos tam safdffffffffffffffffffffffffffffff
+  </div>
+<div id = "right">
+  <div class="singleComp" *ngFor="let user of users">
       <app-person [userData]= "user" [isList]="true"></app-person>
-  </p>
+  </div>
 
+</div>
 </div>
 </body>

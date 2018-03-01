@@ -51,13 +51,13 @@ public uploadProfilePicture(email, file: File) {
   formData.append('fileKey', file, file.name);
   formData.append('email', email);
   return this.http
-    .post(address + '/user/picture', formData);
+    .post(address + '/picture', formData);
 }
 
 
 public getImage(email: string): Observable<File> {
   return this.http
-      .get(address + '/user/picture/' + email, { responseType: ResponseContentType.Blob })
+      .get(address + '/picture/' + email, { responseType: ResponseContentType.Blob })
       .map((res: any) => res.blob());
 }
 
@@ -65,8 +65,8 @@ public getUserNick(email) {
   return this.http.get(address + '/user/nick?email=' + email);
 }
 
-public getAllUsers(page, limit) {
-  return this.http.get(address + '/user/users?page=' + page + '&limit=' + limit);
+public getAllUsers(nick, page, limit) {
+  return this.http.get(address + '/user/users?page=' + page + '&limit=' + limit + '&nick=' + nick);
 }
 }
 

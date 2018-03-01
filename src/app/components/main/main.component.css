@@ -1,12 +1,22 @@
-.vl {
-  border-left: 6px solid green;
+#right {
   height: 100%;
+  width: 15%;
   position: absolute;
   left: 85%;
-  margin-left: -3px;
+  background: linear-gradient(to bottom, #669999 0%, #006666 100%);
+}
+
+#left{
+  height: 100%;
+  position: absolute;
+  right: 15%;
+  background: linear-gradient(to bottom, #666699 0%, #999966 100%);
+  width: 85%;
 }
 
 body {
-  background-color: green;
+  width: 100%;
+  background: linear-gradient(to bottom, #3366ff 0%, #000099 100%);
   height: 100%;
 }
+

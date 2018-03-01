@@ -25,8 +25,9 @@ export class MainComponent implements OnInit {
    }
    this.user.email = localStorage.getItem("userEmail");
 
-   //change limit for pagging
-   this.http.getAllUsers(0, 10).subscribe(data =>
+   //change limit for pagging and nick pattern
+   let nick = "";
+   this.http.getAllUsers(nick, 0, 10).subscribe(data =>
   {
     if (data.status === 200) {
       this.users = data.json();

@@ -2,6 +2,7 @@ img {
   margin-left: 10px;
   height: 40px;
   width: 40px;
+  border-radius: 10px !important;
 }
 .userName {
   margin-left: 5px;
@@ -9,16 +10,14 @@ img {
   font-size: 20px;
 }
 
-hr {
-  width: 100%;
-  display: inline-block;
-}
-
 .colorForList {
   background-color: blue;
+  border-radius: 10px !important;
+
 }
 
 .colorForList:hover {
-  background-color: gray;
+  background: linear-gradient(to bottom, #3366ff 0%, #000099 100%);
+  border-radius: 10px !important;
 }
 
