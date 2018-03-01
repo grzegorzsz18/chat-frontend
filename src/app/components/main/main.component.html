@@ -3,15 +3,17 @@
   <div class="user">
 <app-person [userData]= "user" [isList]="false"></app-person>
 </div>
-<div>
+<div class>
   <div id="left">
-    cos tam safdffffffffffffffffffffffffffffff
+    cos tam safdfff
+    sdsdsd
+    sdsds
   </div>
 <div id = "right">
+    <input #searchUser type="text" class="form-control" placeholder="Search" (change)="searchUsers(searchUser.value)"/>
   <div class="singleComp" *ngFor="let user of users">
       <app-person [userData]= "user" [isList]="true"></app-person>
   </div>
-
 </div>
 </div>
 </body>

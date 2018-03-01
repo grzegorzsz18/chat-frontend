@@ -1,4 +1,5 @@
-  <div class = loginForm>
+  <body>
+    <div class = loginForm>
   email
   <input type = "text" #loginInput>
   password
@@ -32,3 +33,4 @@
   <button [disabled]="!readyForSubmit" type="button" class="btn btn-success" (click)="register(newEmailInput.value, newNickInput.value,
   newPasswordInput.value,newPasswordConfInput.value)">add new user</button>
 </div>
+</body>

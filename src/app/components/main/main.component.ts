@@ -27,7 +27,7 @@ export class MainComponent implements OnInit {
 
    //change limit for pagging and nick pattern
    let nick = "";
-   this.http.getAllUsers(nick, 0, 10).subscribe(data =>
+   this.http.getUsers(nick, 0, 10).subscribe(data =>
   {
     if (data.status === 200) {
       this.users = data.json();
@@ -43,6 +43,15 @@ export class MainComponent implements OnInit {
          this.user.nick = data._body;
       }
   });
+  }
+
+  public searchUsers(value) {
+    this.http.getUsers(value, 0, 10).subscribe(data => {
+        if (data.status === 200) {
+          this.users = data.json();
+          console.log(this.users);
+        }
+      });
   }
 
 }

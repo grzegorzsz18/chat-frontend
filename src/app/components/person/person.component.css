@@ -12,12 +12,21 @@ img {
 
 .colorForList {
   background-color: blue;
-  border-radius: 10px !important;
+  border-radius: 5px !important;
+  border-style: solid;
+  border-right-width: 2px;
+  border-left-width: 2px;
+  border-top-width: 0px;
+  border-bottom-width: 2px;
+}
 
+
+.colorForUser {
+  background-color: rgb(139, 136, 148);
 }
 
 .colorForList:hover {
   background: linear-gradient(to bottom, #3366ff 0%, #000099 100%);
-  border-radius: 10px !important;
+  border-radius: 5px !important;
 }
 

@@ -65,7 +65,7 @@ public getUserNick(email) {
   return this.http.get(address + '/user/nick?email=' + email);
 }
 
-public getAllUsers(nick, page, limit) {
+public getUsers(nick, page, limit) {
   return this.http.get(address + '/user/users?page=' + page + '&limit=' + limit + '&nick=' + nick);
 }
 }
