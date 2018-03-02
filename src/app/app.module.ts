@@ -13,6 +13,9 @@ import { HttpService } from './services/http.service';
 import { Http, HttpModule } from '@angular/http';
 import { MainComponent } from './components/main/main.component';
 import { PersonComponent } from './components/person/person.component';
+import { ConversationComponent } from './components/conversation/conversation.component';
+import { MessageComponent } from './components/message/message.component';
+import { InputConversationComponent } from './components/input-conversation/input-conversation.component';
 
 
 const routes: Routes = [
@@ -25,7 +28,10 @@ const routes: Routes = [
     AppComponent,
     LoginComponent,
     MainComponent,
-    PersonComponent
+    PersonComponent,
+    ConversationComponent,
+    MessageComponent,
+    InputConversationComponent
   ],
   imports: [
     HttpModule, BrowserModule, HttpClientModule,Ng2ImgMaxModule, RouterModule.forRoot(routes, {useHash: true})

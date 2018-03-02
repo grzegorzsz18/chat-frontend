@@ -1,10 +1,10 @@
 <body>
 <div [ngClass]="(!isList)?'colorForUser':'colorForList'">
-<div class="userName">
-  {{userData.nick}}
-</div>
+<div class="userRes">
   <img [src]="imageToShow"
-  alt="Place image title">
+  alt="No Picture">
+  <span>  {{userData.nick}} </span>
+</div>
 </div>
 <i class="glyphicon glyphicon-user"></i>
 </body>
