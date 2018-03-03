@@ -12,9 +12,6 @@ const aPassword = "clientpassword"
 @Injectable()
 export class HttpService {
 
-  private accessToken: String = "";
-  private refreshToken: String = "";
-
 constructor(private http: Http, private router: Router) {
  }
 
@@ -32,13 +29,34 @@ public login(email, password) {
   return this.http.post(address + '/oauth/token', params.toString(), options);
 }
 
-public setTokens(token, email) {
-  this.accessToken = token.access;
-  this.refreshToken = token.refresh;
+public refreshSession() {
+  const params = new URLSearchParams();
+  params.append('grant_type', 'refresh_token');
+  params.append('refresh_token', localStorage.getItem('token_refresh'));
+  const headers = new Headers(
+    {
+   'Content-type': 'application/x-www-form-urlencoded',
+   'Authorization': 'Basic ' + btoa(aClient + ":" + aPassword)}
+  );
+  const options = new RequestOptions({ headers: headers });
+  this.http.post(address + '/oauth/token', params.toString(), options).subscribe(
+    (data: any) => {
+      console.log(data);
+      console.log(data.json().access_token);
+      if (data.status === 200) {
+          localStorage.setItem('token_access', data.json().access_token);
+      }
+    },
+  err => {
+    this.router.navigate(["login"]);
+  });
+}
 
-  localStorage.setItem("token_access", token.access);
-  localStorage.setItem("token_refresh", token.refresh);
-  localStorage.setItem("userEmail", email)
+public setTokens(token, email) {
+
+  localStorage.setItem('token_access', token.access);
+  localStorage.setItem('token_refresh', token.refresh);
+  localStorage.setItem('userEmail', email);
 }
 
 public registerNewUser(email, nick, password) {
@@ -56,17 +74,35 @@ public uploadProfilePicture(email, file: File) {
 
 
 public getImage(email: string): Observable<File> {
+  const headers = new Headers(
+    {
+      'Content-type': 'application/x-www-form-urlencoded',
+      'Authorization': 'Bearer' + localStorage.getItem('token_access')}
+  );
+  const options = new RequestOptions({ headers: headers, responseType: ResponseContentType.Blob});
   return this.http
-      .get(address + '/picture/' + email, { responseType: ResponseContentType.Blob })
+      .get(address + '/picture/' + email, options)
       .map((res: any) => res.blob());
 }
 
 public getUserNick(email) {
-  return this.http.get(address + '/user/nick?email=' + email);
+  const headers = new Headers(
+    {
+      'Content-type': 'application/x-www-form-urlencoded',
+      'Authorization': 'Bearer' + localStorage.getItem('token_access') }
+  );
+  const options = new RequestOptions({ headers: headers });
+  return this.http.get(address + '/user/nick?email=' + email, options);
 }
 
 public getUsers(nick, page, limit) {
-  return this.http.get(address + '/user/users?page=' + page + '&limit=' + limit + '&nick=' + nick);
+  const headers = new Headers(
+    {
+      'Content-type': 'application/x-www-form-urlencoded',
+      'Authorization': 'Bearer' + localStorage.getItem('token_access') }
+  );
+  const options = new RequestOptions({ headers: headers });
+  return this.http.get(address + '/user/users?page=' + page + '&limit=' + limit + '&nick=' + nick, options);
 }
 }
 

@@ -1,6 +1,5 @@
 import { PhotoService } from './../../services/photo.service';
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../../services/auth.service';
 import { HttpService } from '../../services/http.service';
 import { error } from 'util';
 import { Router } from '@angular/router';
@@ -16,8 +15,7 @@ export class LoginComponent implements OnInit {
   info = "";
   fileToUpload: File = null;
   readyForSubmit = false;
-  constructor(private authService: AuthService
-    , private http: HttpService
+  constructor(private http: HttpService
     , private photoService: PhotoService
     , private router: Router) { }
 
@@ -25,7 +23,7 @@ export class LoginComponent implements OnInit {
   }
 
   login(email, password) {
-    this.authService.login(email, password).subscribe(
+    this.http.login(email, password).subscribe(
       (data: any) => {
         if (data.status === 200) {
           const token = {

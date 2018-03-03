@@ -1,0 +1,17 @@
+.autor{
+    display: table-cell;
+}
+
+.time{
+
+  display: table-cell;
+
+}
+
+.text {
+
+}
+
+.messageDetails{
+  font-size: 10px;
+}

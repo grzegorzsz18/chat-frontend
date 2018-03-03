@@ -25,33 +25,32 @@ export class MainComponent implements OnInit {
    }
    this.user.email = localStorage.getItem("userEmail");
 
-   //change limit for pagging and nick pattern
-   let nick = "";
-   this.http.getUsers(nick, 0, 10).subscribe(data =>
-  {
+   this.http.getUsers("", 0, 10).subscribe(data => {
     if (data.status === 200) {
       this.users = data.json();
-      console.log(this.users);
-
     }
-  });
+  }, err => {
+    this.http.refreshSession(); });
   }
 
   ngOnInit() {
     this.http.getUserNick(this.user.email).subscribe((data: any) => {
       if (data.status === 200) {
          this.user.nick = data._body;
-      }
-  });
+      }},
+      err => {
+      this.http.refreshSession();
+      });
   }
 
   public searchUsers(value) {
     this.http.getUsers(value, 0, 10).subscribe(data => {
         if (data.status === 200) {
           this.users = data.json();
-          console.log(this.users);
-        }
-      });
-  }
+        }},
+        err => {
+        this.http.refreshSession();
+        });
+}
 
 }

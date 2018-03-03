@@ -39,7 +39,7 @@ export class PersonComponent implements OnInit {
     this.httpService.getImage(this.userData.email).subscribe(data => {
       this.createImageFromBlob(data);
     }, error => {
-      console.log(error);
+        this.httpService.refreshSession();
     });
 }
 

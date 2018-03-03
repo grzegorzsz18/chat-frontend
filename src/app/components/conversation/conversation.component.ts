@@ -7,6 +7,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ConversationComponent implements OnInit {
 
+  message = {
+    text : "sdsdds",
+    autor: "autor",
+    time: "1212"
+  };
+
   constructor() { }
 
   ngOnInit() {

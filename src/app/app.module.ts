@@ -1,6 +1,5 @@
 import { Ng2ImgMaxModule } from 'ng2-img-max';
 import { PhotoService } from './services/photo.service';
-import { AuthService } from './services/auth.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
@@ -34,9 +33,9 @@ const routes: Routes = [
     InputConversationComponent
   ],
   imports: [
-    HttpModule, BrowserModule, HttpClientModule,Ng2ImgMaxModule, RouterModule.forRoot(routes, {useHash: true})
+    HttpModule, BrowserModule, HttpClientModule, Ng2ImgMaxModule, RouterModule.forRoot(routes, {useHash: true})
   ],
-  providers: [AuthService, HttpService, PhotoService],
+  providers: [HttpService, PhotoService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
