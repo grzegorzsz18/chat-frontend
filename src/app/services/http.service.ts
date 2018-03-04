@@ -104,5 +104,17 @@ public getUsers(nick, page, limit) {
   const options = new RequestOptions({ headers: headers });
   return this.http.get(address + '/user/users?page=' + page + '&limit=' + limit + '&nick=' + nick, options);
 }
+
+
+public getConversations(page, limit) {
+  const headers = new Headers(
+    {
+      'Content-type': 'application/x-www-form-urlencoded',
+      'Authorization': 'Bearer' + localStorage.getItem('token_access') }
+  );
+  const options = new RequestOptions({ headers: headers });
+  return this.http
+  .get(address + '/conversation/user?page=' + page + '&limit=' + limit + '&email=' + localStorage.getItem('userEmail'), options);
+}
 }
 

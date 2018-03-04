@@ -15,6 +15,7 @@ import { PersonComponent } from './components/person/person.component';
 import { ConversationComponent } from './components/conversation/conversation.component';
 import { MessageComponent } from './components/message/message.component';
 import { InputConversationComponent } from './components/input-conversation/input-conversation.component';
+import { ConversationListComponent } from './components/conversation-list/conversation-list.component';
 
 
 const routes: Routes = [
@@ -30,7 +31,8 @@ const routes: Routes = [
     PersonComponent,
     ConversationComponent,
     MessageComponent,
-    InputConversationComponent
+    InputConversationComponent,
+    ConversationListComponent
   ],
   imports: [
     HttpModule, BrowserModule, HttpClientModule, Ng2ImgMaxModule, RouterModule.forRoot(routes, {useHash: true})

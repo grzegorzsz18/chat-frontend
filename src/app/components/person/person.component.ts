@@ -1,3 +1,4 @@
+import { error } from 'util';
 import { Input } from '@angular/core';
 import { Component, OnInit } from '@angular/core';
 import { HttpService } from '../../services/http.service';
@@ -39,7 +40,9 @@ export class PersonComponent implements OnInit {
     this.httpService.getImage(this.userData.email).subscribe(data => {
       this.createImageFromBlob(data);
     }, error => {
-        this.httpService.refreshSession();
+      if (error.status === 401) {
+          this.httpService.refreshSession();
+      }
     });
 }
 
