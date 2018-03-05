@@ -1,3 +1,4 @@
+import { PrivateMessagesService } from './../../services/private-messages.service';
 import { HttpService } from './../../services/http.service';
 import { Component, OnInit } from '@angular/core';
 
@@ -8,17 +9,29 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ConversationListComponent implements OnInit {
 
-  constructor(private http: HttpService) { }
+  constructor(private http: HttpService, private messageService: PrivateMessagesService) { }
 
-  conversations: any;
+  conversations: Array<any> = [];
+  public showConversationsList = true;
 
   ngOnInit() {
     this.http.getConversations(0, 10).subscribe(
       data => {
-        //todo
-        console.log(this.conversations);
+        const conversations = data.json();
+        for (let i = 0 ; i < conversations.length; i ++) {
+          const conversation = {
+            id: conversations[i].id ,
+            users: conversations[i].users,
+            selected: false
+          };
+          this.conversations.push(conversation);
+        }
       }
     );
+    this.messageService.setConversations(this.conversations, this);
   }
 
+  public setConversations(conversations) {
+    this.conversations = conversations;
+  }
 }

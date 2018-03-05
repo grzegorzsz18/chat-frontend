@@ -30,9 +30,7 @@ export class MainComponent implements OnInit {
       this.users = data.json();
     }
   }, err => {
-    if (err.status === 401) {
-      this.http.refreshSession();
-  }}); }
+    this.http.failure(err); }); }
 
   ngOnInit() {
     this.http.getUserNick(this.user.email).subscribe((data: any) => {
@@ -40,9 +38,7 @@ export class MainComponent implements OnInit {
          this.user.nick = data._body;
       }},
       err => {
-        if (err.status === 401) {
-          this.http.refreshSession();
-      }});
+        this.http.failure(err); });
   }
 
   public searchUsers(value) {
@@ -51,9 +47,8 @@ export class MainComponent implements OnInit {
           this.users = data.json();
         }},
         err => {
-          if (err.status === 401) {
-            this.http.refreshSession();
-        }});
+          this.http.failure(err);
+        });
 }
 
 }

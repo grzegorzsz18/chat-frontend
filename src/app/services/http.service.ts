@@ -41,8 +41,6 @@ public refreshSession() {
   const options = new RequestOptions({ headers: headers });
   this.http.post(address + '/oauth/token', params.toString(), options).subscribe(
     (data: any) => {
-      console.log(data);
-      console.log(data.json().access_token);
       if (data.status === 200) {
           localStorage.setItem('token_access', data.json().access_token);
       }
@@ -74,47 +72,41 @@ public uploadProfilePicture(email, file: File) {
 
 
 public getImage(email: string): Observable<File> {
-  const headers = new Headers(
-    {
-      'Content-type': 'application/x-www-form-urlencoded',
-      'Authorization': 'Bearer' + localStorage.getItem('token_access')}
-  );
-  const options = new RequestOptions({ headers: headers, responseType: ResponseContentType.Blob});
+  const options = new RequestOptions({ headers: this.getAuthHeader(), responseType: ResponseContentType.Blob});
   return this.http
       .get(address + '/picture/' + email, options)
       .map((res: any) => res.blob());
 }
 
 public getUserNick(email) {
-  const headers = new Headers(
-    {
-      'Content-type': 'application/x-www-form-urlencoded',
-      'Authorization': 'Bearer' + localStorage.getItem('token_access') }
-  );
-  const options = new RequestOptions({ headers: headers });
+  const options = new RequestOptions({ headers: this.getAuthHeader()});
   return this.http.get(address + '/user/nick?email=' + email, options);
 }
 
 public getUsers(nick, page, limit) {
-  const headers = new Headers(
-    {
-      'Content-type': 'application/x-www-form-urlencoded',
-      'Authorization': 'Bearer' + localStorage.getItem('token_access') }
-  );
-  const options = new RequestOptions({ headers: headers });
+  const options = new RequestOptions({ headers: this.getAuthHeader() });
   return this.http.get(address + '/user/users?page=' + page + '&limit=' + limit + '&nick=' + nick, options);
 }
 
 
 public getConversations(page, limit) {
-  const headers = new Headers(
+  const options = new RequestOptions({ headers: this.getAuthHeader() });
+  return this.http
+  .get(address + '/conversation/user?page=' + page + '&limit=' + limit + '&email=' + localStorage.getItem('userEmail'), options);
+}
+
+private getAuthHeader(): Headers {
+  return new Headers(
     {
       'Content-type': 'application/x-www-form-urlencoded',
       'Authorization': 'Bearer' + localStorage.getItem('token_access') }
   );
-  const options = new RequestOptions({ headers: headers });
-  return this.http
-  .get(address + '/conversation/user?page=' + page + '&limit=' + limit + '&email=' + localStorage.getItem('userEmail'), options);
+}
+
+public failure(err) {
+  if (err.status === 401) {
+    this.refreshSession();
+}
 }
 }
 

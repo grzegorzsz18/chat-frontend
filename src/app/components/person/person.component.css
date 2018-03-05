@@ -1,9 +1,8 @@
 img {
-  margin: 10px;
-  /* margin-left: 10px; */
-  height: 40px;
-  width: 40px;
-  border-radius: 10px !important;
+  margin: 5px;
+  height: 50px;
+  width: 50px;
+  border-radius: 10px ;
 }
 .userRes {
   margin-left: 5px;
@@ -13,12 +12,13 @@ img {
 
 .colorForList {
   background-color: rgba(140, 240, 218, 0.959);
-  border-radius: 5px !important;
+  border-radius: 5px;
   border-style: solid;
   border-right-width: 2px;
   border-left-width: 2px;
   border-top-width: 0px;
   border-bottom-width: 2px;
+  margin: 2px
 }
 
 
@@ -28,6 +28,6 @@ img {
 
 .colorForList:hover {
   background: linear-gradient(to bottom, #80f06a 0%, #23c238 100%);
-  border-radius: 5px !important;
+  border-radius: 5px ;
 }
 

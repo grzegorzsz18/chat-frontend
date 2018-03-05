@@ -3,6 +3,7 @@ import { Input } from '@angular/core';
 import { Component, OnInit } from '@angular/core';
 import { HttpService } from '../../services/http.service';
 import { Ng2ImgMaxModule, Ng2ImgMaxService } from 'ng2-img-max';
+import { PrivateMessagesService } from '../../services/private-messages.service';
 
 @Component({
   selector: 'app-person',
@@ -15,7 +16,9 @@ export class PersonComponent implements OnInit {
   @Input() isList: boolean;
   imageToShow: any;
 
-  constructor(private httpService: HttpService, private ng2ImgMaxService: Ng2ImgMaxService) {
+  constructor(private httpService: HttpService,
+     private ng2ImgMaxService: Ng2ImgMaxService,
+     private messageservice: PrivateMessagesService) {
   }
 
   ngOnInit() {
@@ -39,11 +42,12 @@ export class PersonComponent implements OnInit {
   getImageFromService() {
     this.httpService.getImage(this.userData.email).subscribe(data => {
       this.createImageFromBlob(data);
-    }, error => {
-      if (error.status === 401) {
-          this.httpService.refreshSession();
-      }
+    }, error => {this.httpService.failure(error);
     });
+}
+
+selectUser() {
+    this.messageservice.openConversation(this.userData.nick);
 }
 
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'app-conversation',
@@ -7,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ConversationComponent implements OnInit {
 
+  @Input() conversation;
+  public showConversation = false;
   message = {
     text : "sdsdds",
     autor: "autor",
@@ -16,6 +18,12 @@ export class ConversationComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+  }
+
+  openConversation(event) {
+    event.stopPropagation();
+    this.showConversation = !this.showConversation;
+    this.conversation.selected = false;
   }
 
 }

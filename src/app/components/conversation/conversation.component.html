@@ -1,10 +1,11 @@
 <body>
-<div>
-uczestnicy: jan, janko, janko2
-  <app-message [message]='message'></app-message>
-  <app-message [message]='message'></app-message>
-  <app-message [message]='message'></app-message>
-  <app-message [message]='message'></app-message>
-  <app-input-conversation></app-input-conversation>
+<div (click)="openConversation($event)">
+  Uczestnicy:
+  <span *ngFor="let u of conversation.users">
+    {{u.nick}}
+  </span>
+</div>
+<div *ngIf="showConversation || conversation.selected" class="conversationMessages">
+  <app-message [message]="message"></app-message>
 </div>
 </body>

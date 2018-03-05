@@ -1,6 +1,6 @@
 <body>
 <div [ngClass]="(!isList)?'colorForUser':'colorForList'">
-<div class="userRes">
+<div class="userRes" (click)="selectUser()">
   <img [src]="imageToShow"
   alt="No Picture">
   <span>  {{userData.nick}} </span>

@@ -1,4 +1,19 @@
 body {
-  margin-left: 10px;
-  background-color: rgb(122, 153, 115)
+  margin: 5px;
+  padding: 5px;
+  font-size: 20px;
+  font-family: serif;
+  background-color: rgb(122, 153, 115);
+  border: 1px;
+  border-style: solid;
+  margin-bottom: 2px;
+  border-radius: 10px;
+}
+
+body:hover {
+  background: linear-gradient(to bottom, #90a18b 0%, #7aca6f 100%);
+}
+
+.conversationMessages{
+  height: 400px;
 }
