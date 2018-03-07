@@ -95,6 +95,13 @@ public getConversations(page, limit) {
   .get(address + '/conversation/user?page=' + page + '&limit=' + limit + '&email=' + localStorage.getItem('userEmail'), options);
 }
 
+public getMessages(id, page, limit) {
+  const options = new RequestOptions({ headers: this.getAuthHeader() });
+  return this.http
+  .get(address + '/message/conversation?page=' + page + '&limit=' + limit + '&conversation_id=' + id, options);
+}
+
+
 private getAuthHeader(): Headers {
   return new Headers(
     {

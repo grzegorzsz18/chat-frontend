@@ -15,5 +15,10 @@ body:hover {
 }
 
 .conversationMessages{
-  height: 400px;
+  height: 450px;
+}
+
+.messagesList{
+  height: 300px;
+  overflow-x: auto;
 }

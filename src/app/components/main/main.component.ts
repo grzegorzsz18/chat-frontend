@@ -28,6 +28,7 @@ export class MainComponent implements OnInit {
    this.http.getUsers("", 0, 10).subscribe(data => {
     if (data.status === 200) {
       this.users = data.json();
+      this.removeCurrentUser();
     }
   }, err => {
     this.http.failure(err); }); }
@@ -45,10 +46,15 @@ export class MainComponent implements OnInit {
     this.http.getUsers(value, 0, 10).subscribe(data => {
         if (data.status === 200) {
           this.users = data.json();
+          this.removeCurrentUser();
         }},
         err => {
           this.http.failure(err);
         });
+}
+
+private removeCurrentUser() {
+  this.users = this.users.filter(u => this.user.email !== u.email);
 }
 
 }

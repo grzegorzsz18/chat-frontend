@@ -6,6 +6,17 @@
   </span>
 </div>
 <div *ngIf="showConversation || conversation.selected" class="conversationMessages">
-  <app-message [message]="message"></app-message>
+        <div infiniteScroll class="messagesList"
+        [infiniteScrollDistance]="2"
+        [infiniteScrollThrottle]="1000"
+        [scrollWindow]=false
+        (scrolled)="onScroll()">
+  <div *ngFor="let m of messages">
+  <app-message [message]="m"></app-message>
+  </div>
 </div>
+  <div class="textInput">
+  <app-input-conversation></app-input-conversation>
+  </div>
+  </div>
 </body>

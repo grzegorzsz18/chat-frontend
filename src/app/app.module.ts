@@ -2,6 +2,7 @@ import { Ng2ImgMaxModule } from 'ng2-img-max';
 import { PhotoService } from './services/photo.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 
 
 import { AppComponent } from './app.component';
@@ -21,7 +22,8 @@ import { PrivateMessagesService } from './services/private-messages.service';
 
 const routes: Routes = [
   {path: 'login', component: LoginComponent},
-  {path: 'main', component: MainComponent}
+  {path: 'main', component: MainComponent},
+  {path: '', component: LoginComponent}
 ];
 
 @NgModule({
@@ -36,7 +38,7 @@ const routes: Routes = [
     ConversationListComponent
   ],
   imports: [
-    HttpModule, BrowserModule, HttpClientModule, Ng2ImgMaxModule, RouterModule.forRoot(routes, {useHash: true})
+    HttpModule, BrowserModule, HttpClientModule, InfiniteScrollModule,  Ng2ImgMaxModule, RouterModule.forRoot(routes, {useHash: true})
   ],
   providers: [HttpService, PhotoService, PrivateMessagesService],
   bootstrap: [AppComponent]
