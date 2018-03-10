@@ -55,6 +55,12 @@ public setTokens(token, email) {
   localStorage.setItem('token_access', token.access);
   localStorage.setItem('token_refresh', token.refresh);
   localStorage.setItem('userEmail', email);
+
+  this.getUserNick(email).subscribe((data: any) => {
+    if (data.status === 200) {
+      localStorage.setItem('nick', data._body);
+    }
+  });
 }
 
 public registerNewUser(email, nick, password) {
@@ -101,6 +107,19 @@ public getMessages(id, page, limit) {
   .get(address + '/message/conversation?page=' + page + '&limit=' + limit + '&conversation_id=' + id, options);
 }
 
+public addNewConversation(nick: String) {
+  const header = new Headers(
+    {
+      'Content-type': 'application/json',
+      'Authorization': 'Bearer' + localStorage.getItem('token_access') }
+  );
+  const options = new RequestOptions({ headers: header });
+  const body = [
+    {nick: nick},
+    {nick: localStorage.getItem('nick')}
+];
+  return this.http.put(address + '/conversation', JSON.stringify(body), options);
+}
 
 private getAuthHeader(): Headers {
   return new Headers(
