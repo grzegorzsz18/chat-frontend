@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { HttpService } from '../../services/http.service';
 
 @Component({
   selector: 'app-input-conversation',
@@ -7,9 +8,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class InputConversationComponent implements OnInit {
 
-  constructor() { }
+  @Input() conversationId;
+
+  constructor(private http: HttpService) { }
 
   ngOnInit() {
+  }
+
+  sendMessage(text: String) {
+    this.http.sendMessage(text, this.conversationId).subscribe((data) =>
+  {
+    //todo add to list
+    console.log(data);
+  });
   }
 
 }

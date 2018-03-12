@@ -1,4 +1,4 @@
 <div>
-  <textarea id="inputText"></textarea>
-  <button id="sendButton">send</button>
+  <textarea id="inputText" #inputText></textarea>
+  <button #sendButton id="sendButton" (click)="sendMessage(inputText.value)">send</button>
 </div>
