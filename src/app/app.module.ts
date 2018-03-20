@@ -1,3 +1,4 @@
+import { WebSocketService } from './services/web-socket.service';
 import { Ng2ImgMaxModule } from 'ng2-img-max';
 import { PhotoService } from './services/photo.service';
 import { BrowserModule } from '@angular/platform-browser';
@@ -40,7 +41,7 @@ const routes: Routes = [
   imports: [
     HttpModule, BrowserModule, HttpClientModule, InfiniteScrollModule,  Ng2ImgMaxModule, RouterModule.forRoot(routes, {useHash: true})
   ],
-  providers: [HttpService, PhotoService, PrivateMessagesService],
+  providers: [HttpService, PhotoService, PrivateMessagesService, WebSocketService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

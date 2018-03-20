@@ -23,9 +23,12 @@
     "@angular/router": "^5.0.0",
     "bootstrap": "^4.0.0-beta.3",
     "core-js": "^2.4.1",
+    "express": "^4.16.3",
     "ng2-img-max": "^2.1.15",
     "ngx-infinite-scroll": "^0.8.3",
     "rxjs": "^5.5.2",
+    "socket.io": "^2.0.4",
+    "sockjs-client": "^1.1.4",
     "zone.js": "^0.8.14"
   },
   "devDependencies": {

@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { HttpService } from '../../services/http.service';
+import { PrivateMessagesService } from '../../services/private-messages.service';
 
 @Component({
   selector: 'app-conversation',
@@ -13,9 +14,10 @@ export class ConversationComponent implements OnInit {
   messages = [];
   page;
 
-  constructor(private http: HttpService) { }
+  constructor(private http: HttpService, private messagesService: PrivateMessagesService) { }
 
   ngOnInit() {
+    this.messagesService.setConversationComponent(this.conversation.id, this);
     this.page = 1;
   }
 
@@ -35,6 +37,14 @@ export class ConversationComponent implements OnInit {
     });
   }
 
+  getListOfMessages() {
+    return this.messages;
+  }
+
+  setListOfMessages(messages) {
+    this.messages = messages;
+  }
+
   onScroll() {
     this.http.getMessages(this.conversation.id, this.page, 4).subscribe(data =>
       {
@@ -42,7 +52,6 @@ export class ConversationComponent implements OnInit {
           for(let i of data.json()){
             this.messages.push(i);
           }
-          console.log(this.messages);
           this.page += 1;
         }
       });

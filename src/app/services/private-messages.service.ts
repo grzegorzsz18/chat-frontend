@@ -1,19 +1,30 @@
+import { ConversationComponent } from './../components/conversation/conversation.component';
 import { ConversationListComponent } from './../components/conversation-list/conversation-list.component';
 import { Injectable } from '@angular/core';
-import { ConversationComponent } from '../components/conversation/conversation.component';
 import { HttpService } from './http.service';
+import { Subject } from 'rxjs/Subject';
+import { WebSocketService } from './web-socket.service';
 
 @Injectable()
 export class PrivateMessagesService {
 
-  constructor(private http: HttpService) { }
+  constructor(private http: HttpService) {
+
+  }
 
   conversations;
-  conversationComponent: ConversationListComponent;
+  conversationListComponent: ConversationListComponent;
+  conversationComponents = new Map<number, ConversationComponent>();
+  public messages: Subject<any>;
+
 
   setConversations(conversations, conversationComponent: ConversationListComponent) {
     this.conversations = conversations;
-    this.conversationComponent = conversationComponent;
+    this.conversationListComponent = conversationComponent;
+  }
+
+  setConversationComponent(id: number, component: ConversationComponent) {
+    this.conversationComponents.set(id, component);
   }
 
   openConversation(nick: String) {
@@ -23,7 +34,7 @@ export class PrivateMessagesService {
       let con = this.conversations[id];
       this.conversations.splice(id, 1);
       this.conversations.unshift(con);
-      this.conversationComponent.setConversations(this.conversations);
+      this.conversationListComponent.setConversations(this.conversations);
     }else {
       this.http.addNewConversation(nick).subscribe((data: any) => {
         data = data.json();
@@ -35,6 +46,22 @@ export class PrivateMessagesService {
         this.conversations.unshift(conversation);
       });
     }
+  }
+
+  addNewMessageToConversation(text: String, conversationId: number) {
+    const message = {
+      text: text,
+      autor: localStorage.getItem('nick')
+    };
+    this.conversationComponents.get(conversationId).messages.unshift(message);
+  }
+
+  addNewMessageToConversationFromNotification(text: String, conversationId: number, autor: String) {
+    const message = {
+      text: text,
+      autor: autor
+    };
+    this.conversationComponents.get(conversationId).messages.unshift(message);
   }
 
   findUserInConversations(nick: String) {

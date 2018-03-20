@@ -1,3 +1,4 @@
+import { WebSocketService } from './../../services/web-socket.service';
 import { Component, OnInit } from '@angular/core';
 import { Route } from '@angular/compiler/src/core';
 import { Router } from '@angular/router';
@@ -19,7 +20,9 @@ export class MainComponent implements OnInit {
 
   users: Array<any>;
 
-  constructor(private router: Router, private http: HttpService) {
+  constructor(private router: Router,
+    private http: HttpService,
+  private webSocket: WebSocketService) {
        if (localStorage.getItem("token_access") == null) {
      this.router.navigate(["login"]);
    }
@@ -31,7 +34,8 @@ export class MainComponent implements OnInit {
       this.removeCurrentUser();
     }
   }, err => {
-    this.http.failure(err); }); }
+    this.http.failure(err); });
+  }
 
   ngOnInit() {
     this.http.getUserNick(this.user.email).subscribe((data: any) => {
