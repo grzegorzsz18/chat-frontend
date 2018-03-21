@@ -1,6 +1,13 @@
+import { Message } from './../message/message.component';
 import { Component, OnInit, Input } from '@angular/core';
 import { HttpService } from '../../services/http.service';
 import { PrivateMessagesService } from '../../services/private-messages.service';
+
+export interface Conversation {
+  conversationId: number;
+  messages: Array<Message>;
+  users: Array<String>;
+}
 
 @Component({
   selector: 'app-conversation',
@@ -11,7 +18,7 @@ export class ConversationComponent implements OnInit {
 
   @Input() conversation;
   public showConversation = false;
-  messages = [];
+  messages: Array<Message> = new Array();
   page;
 
   constructor(private http: HttpService, private messagesService: PrivateMessagesService) { }
@@ -37,11 +44,11 @@ export class ConversationComponent implements OnInit {
     });
   }
 
-  getListOfMessages() {
+  getListOfMessages(): Array<Message> {
     return this.messages;
   }
 
-  setListOfMessages(messages) {
+  setListOfMessages(messages: Array<Message>) {
     this.messages = messages;
   }
 

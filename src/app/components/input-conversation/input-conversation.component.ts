@@ -1,3 +1,4 @@
+import { Message } from './../message/message.component';
 import { WebSocketService } from './../../services/web-socket.service';
 import { Component, OnInit, Input } from '@angular/core';
 import { HttpService } from '../../services/http.service';
@@ -19,11 +20,16 @@ export class InputConversationComponent implements OnInit {
   ngOnInit() {
   }
 
-  sendMessage(text: String) {
-    this.webSocket.sendName(text, this.conversationId);
-    this.http.sendMessage(text, this.conversationId).subscribe((data) =>
-  {
-  });
+  sendMessage(input: any) {
+    const message: Message = {
+      autor: localStorage.getItem('nick'),
+      text: input.value,
+      conversationId: this.conversationId,
+      isDisplayed: false,
+      time: 0
+    };
+    input.value = '';
+    this.webSocket.sendName(message);
   }
 
 }

@@ -4,6 +4,7 @@ import { Injectable } from '@angular/core';
 import { HttpService } from './http.service';
 import { Subject } from 'rxjs/Subject';
 import { WebSocketService } from './web-socket.service';
+import { Message } from '../components/message/message.component';
 
 @Injectable()
 export class PrivateMessagesService {
@@ -48,20 +49,8 @@ export class PrivateMessagesService {
     }
   }
 
-  addNewMessageToConversation(text: String, conversationId: number) {
-    const message = {
-      text: text,
-      autor: localStorage.getItem('nick')
-    };
-    this.conversationComponents.get(conversationId).messages.unshift(message);
-  }
-
-  addNewMessageToConversationFromNotification(text: String, conversationId: number, autor: String) {
-    const message = {
-      text: text,
-      autor: autor
-    };
-    this.conversationComponents.get(conversationId).messages.unshift(message);
+  addNewMessageToConversationFromNotification(message: Message) {
+    this.conversationComponents.get(message.conversationId).messages.unshift(message);
   }
 
   findUserInConversations(nick: String) {

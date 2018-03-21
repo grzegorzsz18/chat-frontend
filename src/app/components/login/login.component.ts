@@ -75,7 +75,7 @@ export class LoginComponent implements OnInit {
 uploadFileToActivity(email) {
   this.photoService.postProfilePicture(email, this.fileToUpload).subscribe(data => {
   }, error => {
-    console.log(error);
+    // console.log(error);
   });
 }
 

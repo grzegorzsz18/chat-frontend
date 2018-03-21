@@ -129,17 +129,6 @@ private getAuthHeader(): Headers {
   );
 }
 
-public sendMessage(text: String, conversationId: number) {
-  const header = new Headers(
-    {
-      'Content-type': 'application/json',
-      'Authorization': 'Bearer' + localStorage.getItem('token_access') }
-  );
-  const options = new RequestOptions({ headers: header });
-  return this.http.put(address + '/message?conversationId=' + conversationId + '&userEmail=' + localStorage.getItem('userEmail')
-  , text, options);
-}
-
 public failure(err) {
   if (err.status === 401) {
     this.refreshSession();

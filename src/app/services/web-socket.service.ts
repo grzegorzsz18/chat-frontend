@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import * as Stomp from 'stompjs';
 import * as SockJS from 'sockjs-client';
 import { PrivateMessagesService } from './private-messages.service';
+import { Message } from '../components/message/message.component';
 
 
 @Injectable()
@@ -21,14 +22,14 @@ export class WebSocketService {
     const that = this;
     this.ws.connect({}, function(frame) {
       that.ws.subscribe("/user/" + localStorage.getItem('nick'), function(message) {
-        console.log("Error " + message);
+        // console.log("Error " + message);
       });
       that.ws.subscribe("/user/" + localStorage.getItem('nick'), function(message) {
         that.reciveMessage(message);
       });
       that.disabled = true;
     }, function(error) {
-      console.log("STOMP error " + error);
+      // console.log("STOMP error " + error);
     });
   }
 
@@ -37,21 +38,23 @@ export class WebSocketService {
       this.ws.ws.close();
     }
     this.setConnected(false);
-    console.log("Disconnected");
+    // console.log("Disconnected");
   }
 
-  sendName(message, conversationId) {
-    const data = JSON.stringify({
-      conversationId: conversationId,
-      message : message,
-      autor: localStorage.getItem('nick')
-    });
-    this.ws.send("/app/send/message/" + conversationId, {}, data);
+  sendName(message: Message) {
+    this.ws.send("/app/send/message/" + message.conversationId, {}, JSON.stringify(message));
   }
 
-  reciveMessage(message) {
-    message = JSON.parse(message.body);
-    this.messageService.addNewMessageToConversationFromNotification(message.message, message.conversationId, message.autor);
+  reciveMessage(m: any) {
+    m = JSON.parse(m.body);
+    const message: Message = {
+      autor: m.autor,
+      text: m.text,
+      conversationId: m.conversationId,
+      isDisplayed: false,
+      time: m.time
+    };
+    this.messageService.addNewMessageToConversationFromNotification(message);
   }
 
   setConnected(connected) {
