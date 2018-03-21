@@ -42,7 +42,7 @@ export class WebSocketService {
   }
 
   sendName(message: Message) {
-    this.ws.send("/app/send/message/" + message.conversationId, {}, JSON.stringify(message));
+    this.ws.send("/app/send/message", {}, JSON.stringify(message));
   }
 
   reciveMessage(m: any) {
