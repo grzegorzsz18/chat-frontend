@@ -49,8 +49,8 @@ export class PrivateMessagesService {
     }
   }
 
-  addNewMessageToConversationFromNotification(message: Message) {
-    this.conversationComponents.get(message.conversationId).messages.unshift(message);
+  addNewMessageToConversation(message: Message) {
+    this.conversationComponents.get(message.conversationId).addNewMessage(message);
   }
 
   findUserInConversations(nick: String) {

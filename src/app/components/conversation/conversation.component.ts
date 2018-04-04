@@ -20,6 +20,7 @@ export class ConversationComponent implements OnInit {
   public showConversation = false;
   messages: Array<Message> = new Array();
   page;
+  isNewMessage = false;
 
   constructor(private http: HttpService, private messagesService: PrivateMessagesService) { }
 
@@ -48,8 +49,13 @@ export class ConversationComponent implements OnInit {
     return this.messages;
   }
 
-  setListOfMessages(messages: Array<Message>) {
-    this.messages = messages;
+  addNewMessage(message: Message) {
+    console.log(this.conversation.id);
+    console.log.apply(message.conversationId);
+    this.messages.unshift(message);
+    if(message.autor !== localStorage.getItem('nick')) {
+     // this.setWarningColor();
+    }
   }
 
   onScroll() {

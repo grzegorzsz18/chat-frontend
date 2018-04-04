@@ -21,6 +21,7 @@ export class InputConversationComponent implements OnInit {
   }
 
   sendMessage(input: any) {
+    if (input.value === '') {return; }
     const message: Message = {
       autor: localStorage.getItem('nick'),
       text: input.value,

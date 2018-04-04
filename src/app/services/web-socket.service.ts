@@ -54,7 +54,7 @@ export class WebSocketService {
       isDisplayed: false,
       time: m.time
     };
-    this.messageService.addNewMessageToConversationFromNotification(message);
+    this.messageService.addNewMessageToConversation(message);
   }
 
   setConnected(connected) {
