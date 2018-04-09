@@ -8,9 +8,3 @@ services:
    dockerfile: Dockerfile
   ports:
    - "4200:4200"
-  expose:
-   - "4200"
-  networks:
-   - chat
-networks:
- chat:

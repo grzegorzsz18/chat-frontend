@@ -9,7 +9,7 @@ COPY package.json /usr/src/app/package.json
 USER root
 RUN npm install
 RUN npm install -g --unsafe @angular/cli@1.7.1
-
+RUN npm install stompjs
 COPY . /usr/src/app
 
 CMD ng serve --host 0.0.0.0 --port 4200

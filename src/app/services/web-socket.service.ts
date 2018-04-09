@@ -4,6 +4,9 @@ import * as SockJS from 'sockjs-client';
 import { PrivateMessagesService } from './private-messages.service';
 import { Message } from '../components/message/message.component';
 
+// const address = "http://http://77.55.230.132:1818";
+const address = "ws://localhost:1818/socket";
+
 
 @Injectable()
 export class WebSocketService {
@@ -17,7 +20,7 @@ export class WebSocketService {
 
 
   connect() {
-    const socket = new WebSocket("ws://localhost:1818/socket");
+    const socket = new WebSocket(address);
     this.ws = Stomp.over(socket);
     const that = this;
     this.ws.connect({}, function(frame) {

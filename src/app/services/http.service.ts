@@ -6,6 +6,7 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 
 const address = "http://localhost:1818";
+// const address = "http://http://77.55.230.132:1818";
 const aClient = "client"
 const aPassword = "clientpassword"
 

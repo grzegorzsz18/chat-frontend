@@ -15,6 +15,11 @@ export class ConversationListComponent implements OnInit {
   public showConversationsList = true;
 
   ngOnInit() {
+    this.refresh();
+  }
+
+  refresh() {
+    this.conversations = [];
     this.http.getConversations(0, 10).subscribe(
       data => {
         const conversations = data.json();
@@ -33,5 +38,9 @@ export class ConversationListComponent implements OnInit {
 
   public setConversations(conversations) {
     this.conversations = conversations;
+  }
+
+  public getConversations() {
+    return this.conversations;
   }
 }

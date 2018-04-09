@@ -50,7 +50,11 @@ export class PrivateMessagesService {
   }
 
   addNewMessageToConversation(message: Message) {
-    this.conversationComponents.get(message.conversationId).addNewMessage(message);
+    if (this.conversationComponents.has(message.conversationId)) {
+      this.conversationComponents.get(message.conversationId).addNewMessage(message);
+    }else {
+      this.conversationListComponent.refresh();
+    }
   }
 
   findUserInConversations(nick: String) {
